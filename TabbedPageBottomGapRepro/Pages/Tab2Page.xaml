@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabbedPageBottomGapRepro.Pages.Tab2Page"
+             NavigationPage.HasNavigationBar="False"
+             Title="Browse">
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <Label Text="Browse Tab" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="This is the second tab with basic content." />
+            <Button Text="Browse Item 1" />
+            <Button Text="Browse Item 2" />
+            <Button Text="Browse Item 3" />
+            <Label Text="More filler content to demonstrate the layout." />
+            <BoxView HeightRequest="150" Color="{StaticResource Secondary}" CornerRadius="10" />
+            <Label Text="Notice the spacing issue at the bottom on Android." FontAttributes="Italic" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

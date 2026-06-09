@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabbedPageBottomGapRepro.Pages.Tab1Page"
+             NavigationPage.HasNavigationBar="False"
+             Title="Home">
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <Label Text="Home Tab" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="This is the first tab. Notice the gap between this content and the bottom tab bar on Android." />
+            <Label Text="The bug occurs when TabbedPage is wrapped in a NavigationPage." />
+            <Button Text="Action 1" />
+            <Button Text="Action 2" />
+            <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+            <Button Text="Action 3" />
+            <Label Text="Scroll down to see more content..." />
+            <BoxView HeightRequest="200" Color="{StaticResource Primary}" CornerRadius="10" />
+            <Label Text="End of content — check the gap above the tab bar!" FontAttributes="Italic" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

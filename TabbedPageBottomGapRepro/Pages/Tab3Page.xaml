@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             x:Class="TabbedPageBottomGapRepro.Pages.Tab3Page"
+             NavigationPage.HasNavigationBar="False"
+             Title="About">
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <Label Text="About Tab (with DXCollectionView)" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="This tab includes a DevExpress DXCollectionView to match the real app's control setup." />
+
+            <dxcv:DXCollectionView x:Name="collectionView"
+                                   HeightRequest="300"
+                                   ItemsSource="{Binding Items}">
+                <dxcv:DXCollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BorderColor="{StaticResource Gray300}" CornerRadius="8">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+                                <Label Text="{Binding Description}" FontSize="13" TextColor="{StaticResource Gray500}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </dxcv:DXCollectionView.ItemTemplate>
+            </dxcv:DXCollectionView>
+
+            <Button Text="Refresh Data" Clicked="OnRefreshClicked" />
+            <Label Text="Bottom content — check gap above tab bar!" FontAttributes="Italic" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
