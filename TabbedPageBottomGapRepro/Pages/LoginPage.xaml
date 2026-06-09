@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabbedPageBottomGapRepro.Pages.LoginPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="Login">
+    <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+        <Label Text="TabbedPage Gap Repro"
+               FontSize="32" FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        <Label Text="Simulated login screen — the real app navigates here first, then resets the root to MainTabbedPage via the custom NavigationService."
+               HorizontalTextAlignment="Center" />
+
+        <Entry Placeholder="Username" Text="demo" />
+        <Entry Placeholder="Password" Text="password" IsPassword="True" />
+
+        <Button Text="Login (NavigationPage wrapper — shows bug)"
+                Clicked="OnLoginClicked"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White" />
+
+        <Button Text="Login (no wrapper — workaround)"
+                Clicked="OnLoginNoWrapperClicked"
+                BackgroundColor="{StaticResource Secondary}"
+                TextColor="{StaticResource PrimaryDark}" />
+    </VerticalStackLayout>
+</ContentPage>
