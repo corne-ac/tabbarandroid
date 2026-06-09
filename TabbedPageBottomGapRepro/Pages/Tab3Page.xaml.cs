@@ -16,17 +16,13 @@ public partial class Tab3Page : ContentPage
 
     private List<DummyItem> GenerateDummyData()
     {
-        return new List<DummyItem>
+        var items = new List<DummyItem>();
+        for (int i = 1; i <= 30; i++)
         {
-            new("Item 1", "Description for first item"),
-            new("Item 2", "Description for second item"),
-            new("Item 3", "Description for third item"),
-            new("Item 4", "Description for fourth item"),
-            new("Item 5", "Description for fifth item"),
-            new("Item 6", "Description for sixth item"),
-            new("Item 7", "Description for seventh item"),
-            new("Item 8", "Description for eighth item"),
-        };
+            items.Add(new DummyItem($"Item {i}", $"Description for item {i}"));
+        }
+
+        return items;
     }
 
     private void OnRefreshClicked(object? sender, EventArgs e)

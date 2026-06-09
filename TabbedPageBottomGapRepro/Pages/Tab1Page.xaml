@@ -15,6 +15,21 @@
             <Button Text="Action 3" />
             <Label Text="Scroll down to see more content..." />
             <BoxView HeightRequest="200" Color="{StaticResource Primary}" CornerRadius="10" />
+            <Label Text="Quick links" FontSize="20" FontAttributes="Bold" />
+            <Button Text="Open Dashboard" />
+            <Button Text="Open Activity" />
+            <Button Text="Open Notifications" />
+            <BoxView HeightRequest="180" Color="{StaticResource Secondary}" CornerRadius="10" />
+            <Label Text="Recent updates" FontSize="20" FontAttributes="Bold" />
+            <Label Text="- Profile updated successfully" />
+            <Label Text="- 4 new alerts" />
+            <Label Text="- Weekly summary available" />
+            <BoxView HeightRequest="220" Color="{StaticResource PrimaryDark}" CornerRadius="10" />
+            <Label Text="Tips" FontSize="20" FontAttributes="Bold" />
+            <Label Text="Use pull-to-refresh and tab switching while testing the bottom gap behavior." />
+            <Label Text="Extra content block 1" />
+            <Label Text="Extra content block 2" />
+            <Label Text="Extra content block 3" />
             <Label Text="End of content — check the gap above the tab bar!" FontAttributes="Italic" HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>

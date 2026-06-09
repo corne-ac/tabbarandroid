@@ -13,6 +13,19 @@
             <Button Text="Browse Item 3" />
             <Label Text="More filler content to demonstrate the layout." />
             <BoxView HeightRequest="150" Color="{StaticResource Secondary}" CornerRadius="10" />
+            <Label Text="Categories" FontSize="20" FontAttributes="Bold" />
+            <Button Text="Category A" />
+            <Button Text="Category B" />
+            <Button Text="Category C" />
+            <Button Text="Category D" />
+            <BoxView HeightRequest="170" Color="{StaticResource Primary}" CornerRadius="10" />
+            <Label Text="Recommended" FontSize="20" FontAttributes="Bold" />
+            <Label Text="- Recommended item 01" />
+            <Label Text="- Recommended item 02" />
+            <Label Text="- Recommended item 03" />
+            <Label Text="- Recommended item 04" />
+            <Label Text="- Recommended item 05" />
+            <BoxView HeightRequest="200" Color="{StaticResource SecondaryDarkText}" CornerRadius="10" />
             <Label Text="Notice the spacing issue at the bottom on Android." FontAttributes="Italic" HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
