@@ -14,30 +14,40 @@ When a `TabbedPage` with `android:TabbedPage.ToolbarPlacement="Bottom"` is wrapp
 
 This causes the content area to be pushed up away from the tab bar, creating a visible gap.
 
+## Architecture: No AppShell, Custom Stack-Based NavigationService
+
+The app has **zero Shell usage**. All navigation is managed by a custom `NavigationService` that operates on `NavigationPage` push/pop/root-reset.
+
+### Navigation Flow
+
+1. **App starts** → `App.xaml.cs` creates `Window(new NavigationPage(new LoginPage()))`
+2. **User logs in** → `LoginPage` calls `NavigationService.SetRootPage(new MainTabbedPage())`
+3. **Service resets root** → `Window.Page = new NavigationPage(mainTabbedPage)` ← **BUG triggers here**
+
+### Key Components
+
+- **`INavigationService`** — interface with `PushAsync`, `PopAsync`, `PopToRootAsync`, `SetRootPage`, `SetRootPageNoWrapper`
+- **`NavigationService`** — concrete implementation; holds a reference to `Window` and the current `NavigationPage` root; manages the full navigation stack
+- **`LoginPage`** — entry point; simulates login then calls `SetRootPage()` (bug) or `SetRootPageNoWrapper()` (workaround)
+- **`MainTabbedPage`** — `TabbedPage` with bottom tabs, each child wrapped in `NavigationPage`
+- **`App.xaml`** — defines global implicit styles only (no Shell)
+- **`App.xaml.cs`** — receives `INavigationService` and `LoginPage` via DI; initializes the service with the `Window`
+
 ### How to Verify
 
 The `MainTabbedPage` code-behind includes a `DumpTree` method that logs the Android view hierarchy on `OnHandlerChanged`. Run the app on Android and check the Debug output — the `FragmentContainerView` parent of `ViewPager2` will show non-zero `paddingBottom` and `marginBottom`.
 
 ### Workaround
 
-In `App.xaml.cs`, change:
-```csharp
-// BUG: Gap appears
-return new Window(new NavigationPage(new MainTabbedPage()));
-```
-to:
-```csharp
-// WORKAROUND: Gap disappears
-return new Window(new MainTabbedPage());
-```
+On the login screen, tap **"Login (no wrapper — workaround)"** instead of the primary login button. This calls `SetRootPageNoWrapper()` which sets `Window.Page = new MainTabbedPage()` directly — the gap disappears.
 
 ## Project Structure
 
 - **TabbedPageBottomGapRepro/** — .NET MAUI project targeting `net10.0-android` and `net10.0-ios`
 - **MainTabbedPage** — `TabbedPage` subclass with bottom toolbar placement and `DumpTree` diagnostics
-- **Pages/** — Three tab content pages (`Tab1Page`, `Tab2Page`, `Tab3Page`)
-- **Tab3Page** includes a `DevExpress.Maui.CollectionView.DXCollectionView` with dummy data
-- **Services/NavigationService.cs** — Absolute navigation via `Window.Page = new NavigationPage(page)`
+- **Pages/** — `LoginPage` (entry point), `Tab1Page`, `Tab2Page`, `Tab3Page`
+  - `Tab3Page` includes a `DevExpress.Maui.CollectionView.DXCollectionView` with dummy data
+- **Services/** — `INavigationService` interface + `NavigationService` (custom stack-based, no Shell)
 - **Models/DummyItem.cs** — Simple model for the collection view
 
 ## Dependencies
@@ -56,3 +66,4 @@ return new Window(new MainTabbedPage());
 - `TabbedPage` style sets bar colors
 - Each tab child is wrapped in `NavigationPage`
 - Each content page sets `NavigationPage.HasNavigationBar="False"`
+- All pages and services registered in DI container
